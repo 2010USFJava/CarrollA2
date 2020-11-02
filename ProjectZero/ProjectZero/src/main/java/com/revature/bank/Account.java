@@ -1,3 +1,4 @@
+package com.revature.bank;
 
 public class Account {
 	private int accountId;
@@ -32,8 +33,9 @@ public class Account {
 	public void deposit(double amount) {
 		balance += amount;
 	}
-	public void transfer(double amount) {
+	public void transfer(double amount, int accountId) {
 		
 	}
 
 }
+

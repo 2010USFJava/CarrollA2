@@ -1,46 +1,38 @@
+package com.revature.bank;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer extends User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
-	private String birthday;
 	private String street;
 	private String city;
 	private String state;
 	private String zip;
 	private String username;
 	private String password;
-	private ArrayList<Integer> accountId;
 	private int customerId;
+	private ArrayList<Integer> accountIds;
 	
-	protected Customer() {
-	
-	}
-	protected Customer(String firstName, String lastName, String birthday, String street, String city, String state,
-			String zip, String username, String password) {
+	protected Customer(String firstName, String lastName, String street, String city, String state,
+			String zip, int customerId, String username, String password) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthday = birthday;
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+		this.customerId = customerId;
 		this.username = username;
 		this.password = password;
-	}
-	protected Customer(int accountId, int customerId, Customer customer) {
-		this.firstName = getFirstName();
-		this.lastName = getLastName();
-		this.birthday = getBirthday();
-		this.street = getStreet();
-		this.city = getCity();
-		this.state = getState();
-		this.zip = getZip();
-		this.username = getUsername();
-		this.password = getPassword();
-		this.accountId.add(accountId);
-		this.customerId = customerId;
+		userIds.add(customerId);
+		usernames.add(username);
+		passwords.add(password);
+		customerList.add(this);
 	}
 	public String getFirstName() {
 		return firstName;
@@ -53,12 +45,6 @@ public class Customer {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
 	}
 	public String getStreet() {
 		return street;
@@ -85,16 +71,10 @@ public class Customer {
 		this.zip = zip;
 	}
 	public ArrayList<Integer> getAccountId() {
-		return accountId;
+		return accountIds;
 	}
 	public void setAccountId(Account account) {
-		this.accountId.add(account.getAccountId());
-	}
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+		this.accountIds.add(account.getAccountId());
 	}
 	public String getUsername() {
 		return username;
@@ -108,9 +88,6 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
 	
 
 }

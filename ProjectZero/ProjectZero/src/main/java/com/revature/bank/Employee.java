@@ -1,11 +1,20 @@
+package com.revature.bank;
 
-public class Employee {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Employee extends User {
 	private int employeeId;
 	private String username;
 	private String password;
 	
-	protected Employee(int employeeId) {
+	protected Employee(int employeeId, String username, String password) {
 		this.employeeId = employeeId;
+		this.username = username;
+		this.password = password;
+		userIds.add(employeeId);
+		usernames.add(username);
+		passwords.add(password);
 	}
 	public int getEmployeeId() {
 		return employeeId;
