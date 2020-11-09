@@ -24,7 +24,7 @@ public class Verify {
 					return true;
 				}
 			}
-			System.out.println("Invald account ID");
+			System.out.println("Invald account ID\n");
 		}
 		return false;
 	}
@@ -47,7 +47,7 @@ public class Verify {
 					}
 				}
 			} else {
-				System.out.println("Invalid user ID");
+				System.out.println("Invalid user ID\n");
 			}
 		}
 		return null;
@@ -58,13 +58,13 @@ public class Verify {
 		} else if (type.equalsIgnoreCase("customer") || type.equalsIgnoreCase("employee") || type.equalsIgnoreCase("admin")) {
 			return type.toUpperCase();
 		}
-		return "Invalid type";
+		return "Invalid type\n";
 	}
 	//check if special characters or letters are used
 	public static boolean verifyNum(String number) {
 		for (int i=0; i< number.length(); i++) {
 			if (!(Character.isDigit(number.charAt(i)))) {
-				System.out.println("Incomplete. Must use whole numbers only");
+				System.out.println("Incomplete. Must use whole numbers only\n");
 				return false;
 			}
 		}

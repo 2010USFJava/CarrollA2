@@ -32,12 +32,12 @@ public class MenuMethod {
 							OptionMenu.customerMenu(Verify.userList.get(i));
 						}
 					}else {
-						System.out.println("Invalid password");
+						System.out.println("Invalid password\n");
 						login();
 					}
 				}
 			}
-			System.out.println("Invalid username");
+			System.out.println("Invalid username\n");
 		} while (!(answer.equals("1")));
 		OptionMenu.startup();	
 	}
@@ -102,7 +102,7 @@ public class MenuMethod {
 			OptionMenu.customerMenu(customer);
 		} else if (answer.equalsIgnoreCase("savings") || answer.equalsIgnoreCase("checking")) {
 			AccountRequest request = new AccountRequest(customer,answer);
-			System.out.println("Your request have been submited. It will be reviewed shortly.");
+			System.out.println("Your request have been submited. It will be reviewed shortly.\n");
 		//if joint then enter existing account ID
 		} else if (answer.equalsIgnoreCase("joint")) {
 			System.out.println("Enter the ID number of the account you would like to joint.");
@@ -111,7 +111,7 @@ public class MenuMethod {
 			if (Verify.verifyNum(accountId)) {
 				if (Verify.verifyAccount(accountId)) {
 					AccountRequest request = new AccountRequest(customer,"joint "+accountId);
-					System.out.println("Your request have been submited. It will be reviewed shortly.");
+					System.out.println("Your request have been submited. It will be reviewed shortly.\n");
 				}else {
 					makeAccountRequest(customer);
 				}
@@ -119,7 +119,7 @@ public class MenuMethod {
 				makeAccountRequest(customer);
 			}
 		} else {
-			System.out.println("Invalid account type.");
+			System.out.println("Invalid account type.\n");
 			makeAccountRequest(customer);
 		}
 	}
@@ -175,7 +175,7 @@ public class MenuMethod {
 				if (request.getStatus().equalsIgnoreCase("not reviewed")) {
 					if (request.getType().equalsIgnoreCase(type)) {
 						request.setStatus("denied");
-						Logging.LogIt("info","Customer ID "+customerId+" account has been denied");
+						Logging.LogIt("info","Customer ID "+customerId+" account has been denied\n");
 					}
 				}
 			}
@@ -183,12 +183,12 @@ public class MenuMethod {
 	}
 	public static void viewCustomerInfo() {
 		System.out.println("\t\t\t\t\t\tBank of the People\n");
-		System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-15s%-20s\n", "Last", "First", "Address Line 1", "City", "State", "Zip", "SS#", "Accounts");
+		System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-10s%-20s\n", "Last", "First", "Address Line 1", "City", "State", "Zip", "SS#", "Accounts");
 		System.out.println("_____________________________________________________________________________________________________________________________________");
 		for (int i=0; i< Verify.userList.size(); i++) {
 			//only print users that have an account
 			if (Verify.userList.get(i).getAccounts().size() != 0) {
-			System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-15s%-20s\n", Verify.userList.get(i).getLastName(), Verify.userList.get(i).getFirstName(), Verify.userList.get(i).getStreet(), Verify.userList.get(i).getCity(),
+			System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-10s%-20s\n", Verify.userList.get(i).getLastName(), Verify.userList.get(i).getFirstName(), Verify.userList.get(i).getStreet(), Verify.userList.get(i).getCity(),
 					Verify.userList.get(i).getState(), Verify.userList.get(i).getZip(), Verify.userList.get(i).getSs(), Verify.userList.get(i).getAccounts());
 			}
 		}
@@ -200,7 +200,7 @@ public class MenuMethod {
 			System.out.println("Enter account ID to cancel");
 			String accountId = input.next();
 			if (Verify.findCustomer(customerId).getAccounts().remove(Verify.findAccount(accountId))) {
-				Logging.LogIt("info","Customer ID "+customerId+" account has been cancelled");
+				Logging.LogIt("info","Customer ID "+customerId+" account has been cancelled\n");
 			}
 		}
 	}

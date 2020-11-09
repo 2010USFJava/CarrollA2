@@ -54,10 +54,10 @@ public class Account implements Serializable {
 			double amount = Double.parseDouble(value);
 			this.balance -= amount;
 			if (this.balance < 0) {
-				System.out.println("Transaction incomplete. Insufficient funds");
+				System.out.println("Transaction incomplete. Insufficient funds\n");
 				this.balance += amount; 
 			} else {
-				Logging.LogIt("info","Account ID, "+this.accountId+" was withdrawn $" + amount + ". The new balance is $" + this.balance);
+				Logging.LogIt("info","Account ID, "+this.accountId+" was withdrawn $" + amount + ". The new balance is $" + this.balance+"\n");
 				return true;
 			}
 		}
@@ -68,7 +68,7 @@ public class Account implements Serializable {
 			value = value.substring(0, value.length()-2)+"."+value.substring(value.length()-2, value.length());
 			double amount = Double.parseDouble(value);
 			this.balance += amount;
-			Logging.LogIt("info","Account ID, "+this.accountId+" was deposited $" + amount + ". The new balance is $" + this.balance);	
+			Logging.LogIt("info","Account ID, "+this.accountId+" was deposited $" + amount + ". The new balance is $" + this.balance+"\n");	
 		}
 	}
 	public void transfer(String accountId, String amount) {
@@ -76,7 +76,7 @@ public class Account implements Serializable {
 		if (Verify.verifyAccount(accountId)) {
 			if (this.withdraw(amount) ) {
 				Verify.findAccount(accountId).deposit(amount);
-				Logging.LogIt("info","Account ID, "+this.accountId+" was withdrawn by transfer $" + amount + ". The new balance is $" + this.balance);
+				Logging.LogIt("info","Account ID, "+this.accountId+" was withdrawn by transfer $" + amount + ". The new balance is $" + this.balance+"\n");
 			}
 		}
 	}

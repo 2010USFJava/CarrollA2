@@ -13,9 +13,9 @@ public class BankApp {
 		//admin.setUsername("theAdmin");
 		//admin.setPassword("password");
 		//admin.setType("admin");
-		System.out.println(Verify.userList);
-		System.out.println(Verify.userList.get(0).getAccounts());
-		System.out.println(Verify.accountList);
+		//System.out.println(Verify.userList);
+		//System.out.println(Verify.userList.get(0).getAccounts());
+		//System.out.println(Verify.accountList);
 		
 		OptionMenu.startup();
 
