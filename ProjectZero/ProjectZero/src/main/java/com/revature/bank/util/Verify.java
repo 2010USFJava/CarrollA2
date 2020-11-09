@@ -16,6 +16,7 @@ public class Verify {
 	public static List<Account> accountList = new ArrayList<>();
 	public static List<AccountRequest> requestList = new ArrayList<>();
 	
+	//check if account exist
 	public static boolean verifyAccount(String accountId) {
 		if (verifyNum(accountId)) {
 			for (int i=0; i<Verify.accountList.size(); i++) {
@@ -59,6 +60,7 @@ public class Verify {
 		}
 		return "Invalid type";
 	}
+	//check if special characters or letters are used
 	public static boolean verifyNum(String number) {
 		for (int i=0; i< number.length(); i++) {
 			if (!(Character.isDigit(number.charAt(i)))) {
