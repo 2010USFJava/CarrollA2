@@ -145,11 +145,10 @@ public class MenuMethod {
 							String accountId = input.next();
 							//check if letters or special characters are used and that account exist
 							if (Verify.verifyNum(accountId) && Verify.accountIds.contains(accountId)) {
-								Account account = new Account(accountId, type);
-								Verify.findCustomer(customerId).setAccount(account);
+								Verify.findCustomer(customerId).setAccount(Verify.findAccount(accountId));
 								Logging.LogIt("info","Customer ID "+customerId+" account has been approved");
 							}
-						} else {
+						} else if (type.equalsIgnoreCase("savings") || type.equalsIgnoreCase("checking")) {
 							request.setStatus("approved");
 							//assign new Id to account
 							String newAccountId = "2" + (int)(Math.random()*10000);
@@ -191,6 +190,17 @@ public class MenuMethod {
 			if (Verify.userList.get(i).getAccounts().size() != 0) {
 			System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-15s%-20s\n", Verify.userList.get(i).getLastName(), Verify.userList.get(i).getFirstName(), Verify.userList.get(i).getStreet(), Verify.userList.get(i).getCity(),
 					Verify.userList.get(i).getState(), Verify.userList.get(i).getZip(), Verify.userList.get(i).getSs(), Verify.userList.get(i).getAccounts());
+			}
+		}
+	}
+	public static void cancelAccount() {
+		System.out.println("Enter customer ID.");
+		String customerId = input.next();
+		if (Verify.findCustomer(customerId) != null) {
+			System.out.println("Enter account ID to cancel");
+			String accountId = input.next();
+			if (Verify.findCustomer(customerId).getAccounts().remove(Verify.findAccount(accountId))) {
+				Logging.LogIt("info","Customer ID "+customerId+" account has been cancelled");
 			}
 		}
 	}

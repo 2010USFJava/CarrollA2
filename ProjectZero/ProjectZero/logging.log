@@ -20,3 +20,14 @@
 [INFO ] 2020-11-08 21:23:30.556 [main] Logging - A new joint account, ID number 28066, has been created.
 [INFO ] 2020-11-08 21:23:30.566 [main] Logging - joint = 28066 has been added to CUSTOMER, Id 39251
 [INFO ] 2020-11-08 21:23:30.566 [main] Logging - Customer ID 39251 account has been approved
+[INFO ] 2020-11-08 22:45:26.386 [main] Logging - AccountRequest [customer = doe jane = 39251, type = checking, status = not reviewed] has been made.
+[INFO ] 2020-11-08 22:47:24.953 [main] Logging - A new checking account, ID number 23626, has been created.
+[INFO ] 2020-11-08 22:47:24.965 [main] Logging - checking = 23626 has been added to CUSTOMER, Id 39251
+[INFO ] 2020-11-08 22:47:24.965 [main] Logging - Customer ID 39251 account has been approved
+[INFO ] 2020-11-08 22:47:24.966 [main] Logging - A new checking account, ID number 24534, has been created.
+[INFO ] 2020-11-08 22:47:24.967 [main] Logging - checking = 24534 has been added to CUSTOMER, Id 39251
+[INFO ] 2020-11-08 22:47:24.967 [main] Logging - Customer ID 39251 account has been approved
+[INFO ] 2020-11-08 22:49:32.160 [main] Logging - Customer ID 39251 account has been cancelled
+[INFO ] 2020-11-08 22:57:02.232 [main] Logging - AccountRequest [customer = doe jane = 39251, type = joint 28066, status = not reviewed] has been made.
+[INFO ] 2020-11-08 22:58:43.266 [main] Logging - savings = 28066 has been added to CUSTOMER, Id 39251
+[INFO ] 2020-11-08 22:58:43.275 [main] Logging - Customer ID 39251 account has been approved

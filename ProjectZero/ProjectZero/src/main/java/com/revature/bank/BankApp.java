@@ -1,6 +1,5 @@
 package com.revature.bank;
 
-import com.revature.bank.beans.User;
 import com.revature.bank.menu.OptionMenu;
 import com.revature.bank.util.Filing;
 import com.revature.bank.util.Verify;

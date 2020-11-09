@@ -66,7 +66,8 @@ public class OptionMenu {
 		System.out.println("[2] View account request");
 		System.out.println("[3] Enter into customer account");
 		System.out.println("[4] Register new employee or customer");
-		System.out.println("[5] Quit");
+		System.out.println("[5] Cancel account");
+		System.out.println("[6] Quit");
 		String answer = input.next();
 		switch (answer) {
 		case "1": MenuMethod.viewCustomerInfo(); adminMenu(); break;
@@ -85,7 +86,8 @@ public class OptionMenu {
 				MenuMethod.register(Verify.verifyType(answer));
 			}
 			adminMenu(); break;
-		case "5": MenuMethod.exit();
+		case "5": MenuMethod.cancelAccount(); adminMenu(); break;
+		case "6" : MenuMethod.exit();
 		default: System.out.println("Please enter 1, 2, 3, 4, or 5."); adminMenu();
 		}
 	}
@@ -99,13 +101,13 @@ public class OptionMenu {
 		String answer = input.next();
 		switch (answer) {
 		case "1": 
-			System.out.println("Enter amount to withdraw. Enter amount without decimals (e.g 100.00 = 10000)");
+			System.out.println("Enter amount to withdraw. Enter amount without decimals (e.g 100.00 = 10000).");
 			answer = input.next();
 			account.withdraw(answer);
 			transactionMenu(account); 
 			break;
 		case "2": 
-			System.out.println("Enter amount to deposit. Enter amount without decimals (e.g 100.00 = 10000)");
+			System.out.println("Enter amount to deposit. Enter amount without decimals (e.g 100.00 = 10000).");
 			answer = input.next();
 			account.deposit(answer);
 			transactionMenu(account); 
@@ -113,7 +115,7 @@ public class OptionMenu {
 		case "3":
 			System.out.println("Enter ID number of account receiving tranfer");
 			String accountId = input.next();
-			System.out.println("Enter amount to transfer. Enter amount without decimals (e.g 100.00 = 10000)");
+			System.out.println("Enter amount to transfer. Enter amount without decimals (e.g 100.00 = 10000).");
 			answer = input.next();
 			account.transfer(accountId, answer);
 			transactionMenu(account);
