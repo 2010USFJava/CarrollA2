@@ -1,4 +1,4 @@
-package com.revature.bank;
+package com.revature.bank.util;
 
 import org.apache.logging.log4j.LogManager;
 

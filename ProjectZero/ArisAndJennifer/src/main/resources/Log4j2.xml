@@ -8,7 +8,7 @@
                 </Pattern>
             </PatternLayout>
         </Console>
-        <File name="File" fileName="C:\Users\aris\Documents\Revature\Git clone files\CarrollA2\ProjectZero\ProjectZero\logging.log">
+        <File name="File" fileName="C:\Users\aris\Documents\Revature\Git clone files\CarrollA2\ProjectZero\ArisAndJennifer\logging.log">
             <PatternLayout>
                 <Pattern>
                     [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
@@ -18,7 +18,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.revature.bank.util.Logging" level = "info" additivity= "false">
+        <Logger name="com.revature.util.Logs" level = "info" additivity= "false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref = "File"/>
         </Logger>

@@ -1,0 +1,22 @@
+[INFO ] 2020-11-08 20:33:59.102 [main] Logging - AccountRequest [customer = carroll aris = 33396, type = checking, status = not reviewed] has been made.
+[INFO ] 2020-11-08 20:35:23.815 [main] Logging - A new checking account, ID number 22984, has been created.
+[INFO ] 2020-11-08 20:35:23.824 [main] Logging - checking = 22984 has been added to CUSTOMER, Id 33396
+[INFO ] 2020-11-08 20:35:23.824 [main] Logging - Customer ID 33396 account has been approved
+[INFO ] 2020-11-08 20:36:49.457 [main] Logging - Account ID, 22984 was deposited $100.0. The new balance is $100.0
+[INFO ] 2020-11-08 20:37:06.758 [main] Logging - Account ID, 22984 was withdrawn $50.0. The new balance is $50.0
+[INFO ] 2020-11-08 20:46:00.254 [main] Logging - Account ID, 22984 was deposited $100.0. The new balance is $150.0
+[INFO ] 2020-11-08 20:46:25.203 [main] Logging - Account ID, 22984 was withdrawn $50.0. The new balance is $100.0
+[INFO ] 2020-11-08 20:46:52.147 [main] Logging - AccountRequest [customer = carroll aris = 33396, type = savings, status = not reviewed] has been made.
+[INFO ] 2020-11-08 20:48:43.350 [main] Logging - A new savings account, ID number 28066, has been created.
+[INFO ] 2020-11-08 20:48:43.358 [main] Logging - savings = 28066 has been added to CUSTOMER, Id 33396
+[INFO ] 2020-11-08 20:48:43.359 [main] Logging - Customer ID 33396 account has been approved
+[INFO ] 2020-11-08 20:50:15.464 [main] Logging - Account ID, 22984 was withdrawn $50.0. The new balance is $50.0
+[INFO ] 2020-11-08 20:50:15.465 [main] Logging - Account ID, 28066 was deposited $50.0. The new balance is $50.0
+[INFO ] 2020-11-08 20:50:15.466 [main] Logging - Account ID, 22984 was withdrawn by transfer $5000. The new balance is $50.0
+[INFO ] 2020-11-08 20:52:52.843 [main] Logging - AccountRequest [customer = carroll aris = 33396, type = checking, status = not reviewed] has been made.
+[INFO ] 2020-11-08 20:59:14.709 [main] Logging - Customer ID 33396 account has been denied
+[INFO ] 2020-11-08 21:01:58.913 [main] Logging - A new CUSTOMER, jane doe, has been created.
+[INFO ] 2020-11-08 21:04:08.614 [main] Logging - AccountRequest [customer = doe jane = 39251, type = joint 28066, status = not reviewed] has been made.
+[INFO ] 2020-11-08 21:23:30.556 [main] Logging - A new joint account, ID number 28066, has been created.
+[INFO ] 2020-11-08 21:23:30.566 [main] Logging - joint = 28066 has been added to CUSTOMER, Id 39251
+[INFO ] 2020-11-08 21:23:30.566 [main] Logging - Customer ID 39251 account has been approved
