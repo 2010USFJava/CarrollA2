@@ -31,3 +31,14 @@
 [INFO ] 2020-11-08 22:57:02.232 [main] Logging - AccountRequest [customer = doe jane = 39251, type = joint 28066, status = not reviewed] has been made.
 [INFO ] 2020-11-08 22:58:43.266 [main] Logging - savings = 28066 has been added to CUSTOMER, Id 39251
 [INFO ] 2020-11-08 22:58:43.275 [main] Logging - Customer ID 39251 account has been approved
+[INFO ] 2020-11-09 15:07:59.666 [main] Logging - A new CUSTOMER, janie doe, has been created.
+
+[INFO ] 2020-11-09 15:08:36.996 [main] Logging - AccountRequest [customer = doe janie = 31206, type = joint 28066, status = not reviewed] has been made.
+
+[INFO ] 2020-11-09 15:08:50.855 [main] Logging - AccountRequest [customer = doe janie = 31206, type = checking, status = not reviewed] has been made.
+
+[INFO ] 2020-11-09 15:10:52.141 [main] Logging - savings = 28066 = $50.0 has been added to CUSTOMER, Id 31206
+
+[INFO ] 2020-11-09 15:10:52.159 [main] Logging - Customer ID 31206 account has been approved
+[INFO ] 2020-11-09 15:11:16.068 [main] Logging - Customer ID 31206 account has been denied
+

@@ -147,6 +147,7 @@ public class MenuMethod {
 							if (Verify.verifyNum(accountId) && Verify.accountIds.contains(accountId)) {
 								Verify.findCustomer(customerId).setAccount(Verify.findAccount(accountId));
 								Logging.LogIt("info","Customer ID "+customerId+" account has been approved");
+								Verify.requestList.remove(request);
 							}
 						} else if (type.equalsIgnoreCase("savings") || type.equalsIgnoreCase("checking")) {
 							request.setStatus("approved");
@@ -157,7 +158,8 @@ public class MenuMethod {
 							}
 							Account account = new Account(newAccountId, type);
 							Verify.findCustomer(customerId).setAccount(account);
-							Logging.LogIt("info","Customer ID "+customerId+" account has been approved");	
+							Logging.LogIt("info","Customer ID "+customerId+" account has been approved");
+							Verify.requestList.remove(request);
 						}	
 					}
 				}

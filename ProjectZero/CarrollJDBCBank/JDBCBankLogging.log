@@ -1,0 +1,32 @@
+[INFO ] 2020-11-17 14:37:27.953 [main] Logging - A new CUSTOMER, username = aris1, has been created.
+
+[INFO ] 2020-11-17 14:41:39.570 [main] Logging - A new CHECKING has been created, belonging to aris1
+[INFO ] 2020-11-17 14:41:40.699 [main] Logging - Customer, username = aris1, has created a new checking account
+[INFO ] 2020-11-17 14:58:55.633 [main] Logging - Customer, username = aris1, has created a new checking account
+[INFO ] 2020-11-17 15:40:03.037 [main] Logging - Customer, username = aris1, has created a new checking account
+[INFO ] 2020-11-17 15:46:12.289 [main] Logging - Customer, username = aris1, has created a new checking account
+[INFO ] 2020-11-17 15:46:54.736 [main] Logging - CUSTOMER, username = aris1, has updated stree address to1423 main street
+
+[INFO ] 2020-11-17 16:14:32.317 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 16:15:02.633 [main] Logging - CUSTOMER, username = aris1, has updated stree address to 1234 main street
+
+[INFO ] 2020-11-17 16:27:47.806 [main] Logging - CUSTOMER, username = aris1, has updated stree address to 1234 main street
+
+[INFO ] 2020-11-17 16:28:01.927 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 16:45:43.493 [main] Logging - CUSTOMER, username = aris1, has updated stree address to 1234 main street
+
+[INFO ] 2020-11-17 16:46:30.765 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 16:54:55.319 [main] Logging - CUSTOMER, username = aris1, has updated stree address to 1234 main street
+
+[INFO ] 2020-11-17 17:11:36.391 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:14:44.951 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:16:46.592 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:21:59.326 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:26:10.270 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:42:14.072 [main] Logging - Customer, username = aris1, has created a new CHECKING account
+[INFO ] 2020-11-17 17:43:20.062 [main] Logging - CUSTOMER, ID = 2 has deposited $10.0into account, ID = 4. The new balance is $10.0
+[INFO ] 2020-11-17 17:54:22.817 [main] Logging - CUSTOMER, ID = 2 has deposited $10.0into account, ID = 3. The new balance is $10.0
+[INFO ] 2020-11-17 18:11:18.773 [main] Logging - employee, ID = 1 has deposited $10.0into account, ID = 4. The new balance is $10.0
+[INFO ] 2020-11-17 18:13:21.415 [main] Logging - CUSTOMER, username = aris1, has updated stree address to 1478 make lane
+
+[INFO ] 2020-11-17 18:14:09.874 [main] Logging - employee, ID = 1 has withdrew $10.0into account, ID = 4. The new balance is $0.0
