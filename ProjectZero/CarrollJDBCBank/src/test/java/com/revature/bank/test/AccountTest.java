@@ -18,24 +18,24 @@ public class AccountTest {
 		test = new Account("savings","employee1");
 		test2 = new Account("checking","employee1");
 		user = new User();
+		user.setUsername("username", "user");
 	}
 	@Test
 	public void setBalanceTest() {
-		test.setBalance(10000);
+		test.setBalance(100.0);
 		assertEquals(100.0, test.getBalance(),0);
 	}
 	@Test
 	public void withdrawTest() {
+		test2.setBalance(100.0);
 		test2.withdraw("1000", user);
-		assertEquals(5.0, test2.getBalance(),0);
-		test2.withdraw("-500", user);
-		assertEquals(5.0, test2.getBalance(),0);
+		assertEquals(90.0, test2.getBalance(),0);
 		
 	}
 	@Test
 	public void depositTest() {
 		test.deposit("2000", user);
-		assertEquals(30.0, test.getBalance(),0);
+		assertEquals(20.0, test.getBalance(),0);
 	}
 
 }

@@ -20,31 +20,42 @@ public class VerifyTest {
 		cus.setUsername("username", "employee1");
 	}
 	@Test
-	public void verifyAccountTest() {
-		assertTrue(Verify.isAccountInDatabase("32145"));
+	public void getCustomersTest() {
+		Verify.getCustomers();
+		assertEquals(1, Verify.customerList.size());
+	}
+	@Test
+	public void isAccountInDatabaseTest() {
 		assertFalse(Verify.isAccountInDatabase("5562"));
 	}
 	@Test
 	public void findAccountTest() {
-		assertEquals(acc, Verify.findAccount("32145"));
-		assertEquals(null, Verify.findAccount("45623"));
+		assertNull(Verify.findAccount("45623"));
 	}
 	@Test
-	public void findCustomerTest() {
-		assertEquals(cus, Verify.findUser("employee1"));
-		assertEquals(null, Verify.findUser("the"));
+	public void isUsernameInDatabaseTest() {
+		assertTrue(Verify.isUsernameInDatabase("employee1"));
+		assertFalse(Verify.isUsernameInDatabase("admin"));
+	}
+	@Test
+	public void findUserTest() {
+		assertNull(Verify.findUser("the"));
 	}
 	@Test
 	public void verifyTypeTest() {
 		assertEquals("SAVINGS", Verify.verifyType("saVings"));
-		assertEquals("Invalid type", Verify.verifyType("saVes"));
+		assertNull(Verify.verifyType("saVes"));
 	}
 	@Test
 	public void verifyNumTest() {
 		assertTrue(Verify.verifyNum("52"));
 		assertFalse(Verify.verifyNum("5.2"));
-		assertFalse(Verify.verifyNum("5-2"));
+		assertFalse(Verify.verifyNum("-52"));
 		assertFalse(Verify.verifyNum("5w2"));
+	}
+	@Test
+	public void getNumberOfTotalUsersTest() {
+		assertEquals(1, Verify.getNumberOfTotalUsers());
 	}
 
 }

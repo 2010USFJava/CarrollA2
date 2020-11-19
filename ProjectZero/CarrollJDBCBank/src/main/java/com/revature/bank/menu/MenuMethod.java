@@ -23,11 +23,13 @@ public class MenuMethod {
 				if (answer.equals(user.getPassword())) {
 					//enter menu based on type of user
 					if (user.getType().equalsIgnoreCase("Employee")){
-						OptionMenu.employeeMenu(user);
 						Logging.LogIt("info","An " +user.getType()+ ", username = "+user.getUsername()+", has logged in.");
+						System.out.println(" ");
+						OptionMenu.employeeMenu(user);				
 					} else {
-						OptionMenu.customerMenu(user);
 						Logging.LogIt("info","A " +user.getType()+ ", username = "+user.getUsername()+", has logged in.");
+						System.out.println(" ");
+						OptionMenu.customerMenu(user);
 					}
 				}else {
 					System.out.println("Invalid password\n");
@@ -53,9 +55,11 @@ public class MenuMethod {
 		}
 		System.out.println("Enter street address.");
 		String street = input.nextLine();
-		System.out.println("Enter city state and zip, without commas.");
+		System.out.println("Enter city.");
 		String city = input.nextLine();
+		System.out.println("Enter state.");
 		String state = input.nextLine();
+		System.out.println("Enter zip code.");
 		String zip = input.nextLine();
 		//check if zipcode is 5 digits
 		while (!(Verify.verifyNum(zip)) || zip.length() != 5) {
@@ -75,18 +79,11 @@ public class MenuMethod {
 		//create new user and add to database
 		User user = new User(firstName, lastName, ss, street, city, state, Integer.valueOf(zip), username, password, type);
 		Verify.addUserToDatabase(user);
-		System.out.println("Account was created successfully. Would you like to enter into account? y/n");
-		//enter menu based on type of user
-		if (input.nextLine().equalsIgnoreCase("y")) {
-			if (type.equalsIgnoreCase("customer")) {
-				OptionMenu.customerMenu(user);
-			} else if (type.equalsIgnoreCase("employee")) {
-				OptionMenu.employeeMenu(user);
-			}
-		}
+		Logging.LogIt("info","A new "+user.getType()+", username = " +user.getUsername()+", profile has been created.");
+		System.out.println(" ");
 	}
 	public static void newAccount(User customer) {
-		System.out.println("Enter the type of account you would like to open. (e.g. checking, saving, joint)");
+		System.out.println("Enter the type of account you would like to open. (e.g. checking or savings)");
 		String answer = input.nextLine();
 		if (answer.equalsIgnoreCase(Verify.verifyType(answer))) {
 			Account account = new Account(Verify.verifyType(answer), customer.getUsername());
@@ -97,18 +94,20 @@ public class MenuMethod {
 			Verify.addToUserAccountTable(account.getAccountId(), customer.getUsername());
 		}
 	}
-	public static void viewAllCustomerInfo() {
+	public static void viewAllUsersInfo() {
+		Verify.customerList.clear();
 		Verify.getCustomers();
-		System.out.println("\t\t\t\t\t\tBank of the People\n");
-		System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-10s%-20s\n", "Last", "First", "Address Line 1", "City", "State", "Zip", "SS#", "Accounts");
-		System.out.println("_____________________________________________________________________________________________________________________________________");
+		System.out.println("\t\t\t\t\t\tBank of the People\ttotal users: "+Verify.getNumberOfTotalUsers()+"\n");
+		System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-15s%-15s%-15s%-25s\n", "Last", "First", "Address Line 1", "City", "State", "Zip", "SS#", "Username", "Password", "Accounts");
+		System.out.println("________________________________________________________________________________________________________________________________________________________");
 		for (int i=0; i< Verify.customerList.size(); i++) {
 			//only print users that have an account
 			if (!(Verify.customerList.get(i).getAccounts().contains(null))) {
-			System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-10s%-20s\n", Verify.customerList.get(i).getLastName(), Verify.customerList.get(i).getFirstName(), Verify.customerList.get(i).getStreet(), Verify.customerList.get(i).getCity(),
-					Verify.customerList.get(i).getState(), Verify.customerList.get(i).getZip(), Verify.customerList.get(i).getSs(), Verify.customerList.get(i).getAccounts());
+			System.out.printf("%-15s%-15s%-25s%-15s%-10s%-10s%-15s%-15s%-15s%-25s\n", Verify.customerList.get(i).getLastName(), Verify.customerList.get(i).getFirstName(), Verify.customerList.get(i).getStreet(), Verify.customerList.get(i).getCity(),
+					Verify.customerList.get(i).getState(), Verify.customerList.get(i).getZip(), Verify.customerList.get(i).getSs(),  Verify.customerList.get(i).getUsername(), Verify.customerList.get(i).getPassword(), Verify.customerList.get(i).getAccounts());
 			}
 		}
+		System.out.println(" ");
 	}
 	public static void viewProfile(User user) {
 		System.out.println("ID = "+user.getUserId());
@@ -166,25 +165,26 @@ public class MenuMethod {
 		}
 	}
 	public static void cancelAccount() {
-		System.out.println("Enter username.");
+		System.out.println("Enter username of account holder.");
 		String username = input.nextLine();
-		if (Verify.findUser(username) != null) {
+		if (Verify.isUsernameInDatabase(username)) {
 			System.out.println("Enter account ID to cancel");
 			String accountId = input.nextLine();
-			if (Verify.findAccount(accountId).getBalance() == 0) {
-				if (Verify.findUser(username).getAccounts().remove(Verify.findAccount(accountId))) {
-					Logging.LogIt("info","Customer, username = "+Verify.findUser(username).getUsername()+", account, ID = "+Verify.findAccount(accountId).getAccountId()+", has been cancelled");
+			if (Verify.isAccountInDatabase(accountId)) {
+				Account a = Verify.findAccount(accountId);
+				if (Verify.deleteAccountInDatabase(accountId)) {
+					Logging.LogIt("info","Customer, username = "+username+", account, ID = "+accountId+", has been cancelled");
 					System.out.println(" ");
+					Verify.findUser(username).getAccounts().remove(a);
 				} else {
-					System.out.println("Transaction incomplete.\n");
+					System.out.println("Account was not deleted");
 				}
-			} else {
-				System.out.println("Account must be empty to delete. Please withdraw all monies.");
 			}
 		}
 	}
-	public static void logOut() {
+	public static void logOut(User user) {
 		//save any changes and exit
+		Logging.LogIt("info","An " +user.getType()+ ", username = "+user.getUsername()+", has logged out.");
 		System.out.println("Good-bye"); 
 		System.exit(0);
 	}

@@ -13,22 +13,23 @@ public class OptionMenu {
 		System.out.println("Select from options:\n");
 		System.out.println("\t[1] Login");
 		System.out.println("\t[2] Register as new customer");
-		System.out.println("\t[3] Log out and/or quit\n");
+		System.out.println("\t[3] Quit\n");
 		String answer = input.nextLine();
 		switch (answer) {
 		case "1": MenuMethod.login(); startup(); break;
 		case "2": MenuMethod.register("CUSTOMER"); startup(); break;
-		case "3": MenuMethod.logOut();
+		case "3": System.exit(0);
 		default: System.out.println("Please enter a 1, 2, or 3.\n"); startup();
 		}
 	}
 	public static void customerMenu(User customer) {
 		System.out.println("Hello " + customer.getFirstName() + ", please select from options:\n");
-		System.out.println("\t[1] View accounts");
+		System.out.println("\t[1] View account");
 		System.out.println("\t[2] Open new account");
 		System.out.println("\t[3] View/update profile");
 		System.out.println("\t[4] Close an account");
-		System.out.println("\t[5] Log out\n");
+		System.out.println("\t[5] Back to previous menu");
+		System.out.println("\t[6] Log out\n");
 		String answer = input.nextLine();
 		switch (answer) {
 		case "1":
@@ -45,7 +46,6 @@ public class OptionMenu {
 			customerMenu(customer); break;
 		case "2": 
 			MenuMethod.newAccount(customer); 
-			
 			customerMenu(customer); 
 			break;
 		case "3": 
@@ -58,23 +58,25 @@ public class OptionMenu {
 			MenuMethod.cancelAccount(); 
 			customerMenu(customer); 
 			break;
-		case "5": MenuMethod.logOut();
-		default: System.out.println("Please enter 1, 2, 3, 4, or 5.\n"); customerMenu(customer);
+		case "5": break;
+		case "6": MenuMethod.logOut(customer);
+		default: System.out.println("Please enter 1, 2, 3, 4, 5, or 6.\n"); customerMenu(customer);
 		}
 	}
 	public static void employeeMenu(User employee) {
 		System.out.println("Select from options:\n");
-		System.out.println("\t[1] View all customer accounts");
+		System.out.println("\t[1] View all user profiles");
 		System.out.println("\t[2] Enter into customer account");
 		System.out.println("\t[3] View/update customer or employee profile");
 		System.out.println("\t[4] Register new employee or customer");
 		System.out.println("\t[5] Delete customer profile");
 		System.out.println("\t[6] Cancel account");
-		System.out.println("\t[7] Log out\n");
+		System.out.println("\t[7] Back to previous menu");
+		System.out.println("\t[8] Log out\n");
 		String answer = input.nextLine();
 		switch (answer) {
 		case "1": 
-			MenuMethod.viewAllCustomerInfo(); 
+			MenuMethod.viewAllUsersInfo(); 
 			employeeMenu(employee); 
 			break;
 		case "2":
@@ -99,15 +101,16 @@ public class OptionMenu {
 			}
 			employeeMenu(employee); break;
 		case "5": 
-			System.out.println("Enter username");
+			System.out.println("Enter username of profile to be deleted.");
 			answer = input.nextLine();
 			if (Verify.isUsernameInDatabase(answer)) {
 				Verify.deleteProfile(Verify.findUser(answer)); 
 			}
 			employeeMenu(employee); break;
 		case "6": MenuMethod.cancelAccount(); employeeMenu(employee); break;
-		case "7" : MenuMethod.logOut();
-		default: System.out.println("Please enter 1, 2, 3, 4, 5, 6, or 7.\n"); employeeMenu(employee);
+		case "7": break;
+		case "8": MenuMethod.logOut(employee);
+		default: System.out.println("Please enter 1, 2, 3, 4, 5, 6, 7, or 8.\n"); employeeMenu(employee);
 		}
 	}
 	public static void accountMenu(Account account, User user) {

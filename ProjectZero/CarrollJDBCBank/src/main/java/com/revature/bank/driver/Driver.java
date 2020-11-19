@@ -9,5 +9,4 @@ public class Driver {
 
 		OptionMenu.startup();
 	}
-
 }

@@ -52,7 +52,7 @@ public class Verify {
 			if(udi.verifyUsername(username)) {
 				return true;
 			}else {
-				System.out.println("Invalid username.\n");
+				System.out.println("Username not found.\n");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +80,8 @@ public class Verify {
 		} else if (type.equalsIgnoreCase("customer") || type.equalsIgnoreCase("employee") || type.equalsIgnoreCase("admin")) {
 			return type.toUpperCase();
 		}
-		return "Invalid type\n";
+		System.out.println("Invalid type\\n");
+		return null;
 	}
 	//check if special characters or letters are used
 	public static boolean verifyNum(String number) {
@@ -116,5 +117,27 @@ public class Verify {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public static boolean deleteAccountInDatabase(String accountId) {
+		try {
+			adi.deleteAccount(Integer.valueOf(accountId));
+		} catch(CannotDeleteAccountException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(!(isAccountInDatabase(accountId))) {
+			return true;
+		}
+		return false;
+	}
+	public static int getNumberOfTotalUsers() {
+		int total = 0;
+		try {
+			total = adi.getNumberOfTotalUsers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import com.revature.bank.bean.Account;
 import com.revature.bank.bean.Transaction;
 import com.revature.bank.dao.AccountDao;
+import com.revature.bank.exception.CannotDeleteAccountException;
 import com.revature.bank.util.DBConnection;
 
 public class AccountDaoImpl implements AccountDao {
@@ -24,7 +25,7 @@ public class AccountDaoImpl implements AccountDao {
 		PreparedStatement prepStmt = connect.prepareStatement(selectQuery);
 		prepStmt.setInt(1, accountId);
 		ResultSet rs = prepStmt.executeQuery();
-		if (rs.next()) {
+		while (rs.next()) {
 			return true;
 		}
 		return false;
@@ -54,7 +55,7 @@ public class AccountDaoImpl implements AccountDao {
 		prepStmt.setInt(1, accountId);
 		ResultSet rs = prepStmt.executeQuery();
 		while (rs.next()) {
-			Transaction t = new Transaction(rs.getInt(2), rs.getString(3), rs.getDouble(4),rs.getDate(5), rs.getTime(6));
+			Transaction t = new Transaction(rs.getInt(2), rs.getString(3), rs.getDouble(4),rs.getTimestamp(5));
 			tList.add(t);
 		}
 		return tList;
@@ -63,7 +64,7 @@ public class AccountDaoImpl implements AccountDao {
 	public void addTransactionToDatabase(Transaction trans) throws SQLException {
 		//add new transaction to the database
 		Connection connect = db.getConnection();
-		String insertQuery = "insert into transaction_history values(default, ?, ?, ?)";
+		String insertQuery = "insert into transaction_history values(default, ?, ?, ?, now())";
 		PreparedStatement prepStmt = connect.prepareStatement(insertQuery);
  
 			prepStmt.setInt(1, trans.getAccountId());
@@ -119,5 +120,37 @@ public class AccountDaoImpl implements AccountDao {
 			id = rs.getInt(1);
 		}
 		return id;
+	}
+	@Override
+	public void deleteAccount(int accountId) throws SQLException {
+		Connection connect = db.getConnection();
+		String selectQuery = "select balance from accounts where id=?";
+		PreparedStatement prepStmt = connect.prepareStatement(selectQuery);
+		prepStmt.setInt(1, accountId);
+		ResultSet rs = prepStmt.executeQuery();
+		int balance = 0;
+		while(rs.next()) {
+			balance = rs.getInt(1);
+			if (balance > 0) {
+				throw new CannotDeleteAccountException("There is money in account. Account cannot be deleted.");
+			} else {
+				String deleteQuery = "delete from accounts where id=?";
+				PreparedStatement prepStmt2 = connect.prepareStatement(deleteQuery);
+				prepStmt2.setInt(1, accountId);
+				int row = prepStmt2.executeUpdate();
+			}
+		}
+
+	}
+	@Override
+	public int getNumberOfTotalUsers() throws SQLException {
+		Connection connect = db.getConnection();
+		Statement stmt = connect.createStatement();
+		ResultSet rs = stmt.executeQuery("select total_users()");
+		int total = 0;
+		while (rs.next()) {
+			total = rs.getInt(1);
+		}
+		return total;
 	}
 }

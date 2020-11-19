@@ -22,5 +22,9 @@ public interface AccountDao {
 	public void addToUserAccountTable(int accountId,String username) throws SQLException;
 	
 	public int addAccount(Account account) throws SQLException;
+	
+	public void deleteAccount(int accountId) throws SQLException;
+	
+	public int getNumberOfTotalUsers() throws SQLException;
 
 }

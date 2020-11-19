@@ -46,8 +46,9 @@ public class Account {
 		this.type = type;
 	}
 	public List<Transaction> getTransactions() {
+		transactions.clear();
 		try {
-			transactions.addAll(adi.getTransactionsByAccountId(this.accountId));
+				transactions.addAll(adi.getTransactionsByAccountId(this.accountId));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +74,7 @@ public class Account {
 					e.printStackTrace();
 				}
 				this.transactions.add(trans);
-				Logging.LogIt("info",user.getType()+", ID = "+user.getUserId()+" has withdrew $" + amount +"into account, ID = "+this.accountId+". The new balance is $" + this.balance);
+				Logging.LogIt("info",user.getType()+", ID = "+user.getUserId()+", has withdrew $" + amount +" into account, ID = "+this.accountId+". The new balance is $" + this.balance);
 				System.out.println(" ");
 			}
 		}
@@ -92,7 +93,7 @@ public class Account {
 				e.printStackTrace();
 			}
 			this.transactions.add(trans);
-			Logging.LogIt("info",user.getType()+", ID = "+user.getUserId()+" has deposited $" + amount +"into account, ID = "+this.accountId+". The new balance is $" + this.balance);	
+			Logging.LogIt("info",user.getType()+", ID = "+user.getUserId()+", has deposited $" + amount +" into account, ID = "+this.accountId+". The new balance is $" + this.balance);	
 			System.out.println(" ");
 		}
 	}

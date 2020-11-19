@@ -37,8 +37,6 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.type = type;
-		Logging.LogIt("info","A new "+this.type+", username = " +this.username+", has been created.\n");
-		System.out.println(" ");
 	}
 	public User(int userId, String firstName, String lastName, String ss, String street, String city, String state,
 			int zip, String username, String password, String type) {	
@@ -74,7 +72,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.firstName = firstName;
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated first name to " + this.firstName+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated first name to " + this.firstName);
+		System.out.println(" ");
 	}
 	public String getLastName() {
 		return lastName;
@@ -86,7 +85,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.lastName = lastName;
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated last name to " + this.lastName+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated last name to " + this.lastName);
+		System.out.println(" ");
 	}
 	public String getStreet() {
 		return street;
@@ -98,7 +98,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.street = street;
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated stree address to " + this.street+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated stree address to " + this.street);
+		System.out.println(" ");
 	}
 	public String getCity() {
 		return city;
@@ -110,7 +111,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.city = city;
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated city to " + this.city+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated city to " + this.city);
+		System.out.println(" ");
 	}
 	public String getState() {
 		return state;
@@ -122,7 +124,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.state = state;
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated state to " + this.state+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated state to " + this.state);
+		System.out.println(" ");
 	}
 	public int getZip() {
 		return zip;
@@ -134,7 +137,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.zip = Integer.valueOf(zip);
-		Logging.LogIt("info", this.type+", username = " +this.username+", has updated zipcode to " + this.zip+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", has updated zipcode to " + this.zip);
+		System.out.println(" ");
 	}
 	public String getSs() {
 		return ss;
@@ -149,7 +153,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.username = username;
-		Logging.LogIt("info", this.type+", Id "+this.getUserId()+", username has been changed to "+this.username+"\n");
+		Logging.LogIt("info", this.type+", Id "+this.getUserId()+", username has been changed to "+this.username);
+		System.out.println(" ");
 	}
 	public String getPassword() {
 		return password;
@@ -161,7 +166,8 @@ public class User {
 			e.printStackTrace();
 		}
 		this.password = password;
-		Logging.LogIt("info", this.type+", username = " +this.username+", password has been changed to "+this.password+"\n");
+		Logging.LogIt("info", this.type+", username = " +this.username+", password has been changed to "+this.password);
+		System.out.println(" ");
 	}
 	public String getType() {
 		return type;
@@ -170,8 +176,9 @@ public class User {
 		this.type = type;
 	}
 	public List<Account> getAccounts() {
+		accounts.clear();
 		try {
-			accounts.addAll(udi.getAccountsByUsername(this.username));
+				accounts.addAll(udi.getAccountsByUsername(this.username));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	

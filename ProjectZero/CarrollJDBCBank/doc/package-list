@@ -1,0 +1,8 @@
+com.revature.bank.bean
+com.revature.bank.dao
+com.revature.bank.doaImpl
+com.revature.bank.driver
+com.revature.bank.exception
+com.revature.bank.menu
+com.revature.bank.test
+com.revature.bank.util

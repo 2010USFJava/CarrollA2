@@ -13,7 +13,7 @@ import com.revature.bank.bean.*;
 import com.revature.bank.dao.UserDao;
 import com.revature.bank.exception.CannotDeleteAccountException;
 import com.revature.bank.util.DBConnection;
-import com.revature.bank.util.Verify;
+import com.revature.bank.util.Logging;
 
 public class UserDaoImpl implements UserDao {
 	public static DBConnection db = DBConnection.getInstance();
@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 		prepStmt.setString(1, username);
 		ResultSet rs = prepStmt.executeQuery();
 		Account a = null;
-		if (rs.next()) {
+		while (rs.next()) {
 			//for each field and data type
 			a = new Account(rs.getInt(2), rs.getString(4), rs.getDouble(5));
 			aList.add(a);
@@ -112,50 +112,57 @@ public class UserDaoImpl implements UserDao {
 	public void updateUserInfo(String field, String newInfo, String username) throws SQLException {
 		//update user info based on field name
 		Connection connect = db.getConnection();
-		String updateQuery = "update users set street=? where username=?";
-		PreparedStatement prepStmt = connect.prepareStatement(updateQuery);
-/*		switch (field.toLowerCase()) {
+
+		switch (field.toLowerCase()) {
 		case "first name": 
-			prepStmt.setString(1, "'first_name'");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
-		case "last name": 
-			prepStmt.setString(1, "last_name");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();*/
-//		case "street address": 
-//			prepStmt.setString(1, "street");
+			String updateQuery = "update users set first_name=? where username=?";
+			PreparedStatement prepStmt = connect.prepareStatement(updateQuery);
 			prepStmt.setString(1, newInfo);
 			prepStmt.setString(2, username);
-			prepStmt.executeUpdate();
-/*		case "city": 
-			prepStmt.setString(1, "city");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
+			prepStmt.executeUpdate(); break;
+		case "last name": 
+			updateQuery = "update users set last_name=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);;
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
+		case "street address": 
+			updateQuery = "update users set street=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
+		case "city": 
+			updateQuery = "update users set city=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
 		case "state": 
-			prepStmt.setString(1, "state");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
+			updateQuery = "update users set state=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
 		case "zip code": 
-			prepStmt.setString(1, "zip");
-			prepStmt.setInt(2, Integer.valueOf(newInfo));
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
+			updateQuery = "update users set zip=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setInt(1, Integer.valueOf(newInfo));
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
 		case "username": 
-			prepStmt.setString(1, "username");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
+			updateQuery = "update users set username=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
 		case "password": 
-			prepStmt.setString(1, "password");
-			prepStmt.setString(2, newInfo);
-			prepStmt.setString(3, username);
-			prepStmt.executeUpdate();
-		}*/
+			updateQuery = "update users set user_password=? where username=?";
+			prepStmt = connect.prepareStatement(updateQuery);
+			prepStmt.setString(1, newInfo);
+			prepStmt.setString(2, username);
+			prepStmt.executeUpdate(); break;
+		}
 	}
 	@Override
 	public void deleteCustomerAndAccounts(User user) throws SQLException, CannotDeleteAccountException {
@@ -169,25 +176,27 @@ public class UserDaoImpl implements UserDao {
 				ResultSet rs = prepStmt.executeQuery();
 				while (rs.next()) {
 					double balance = rs.getDouble(1);
-				if (balance > 0) {
-					throw new CannotDeleteAccountException("There is money in account. Account cannot be deleted.");
-				} else {
-					String deleteQuery = "delete from accounts where id=?";
-					prepStmt = connect.prepareStatement(deleteQuery);
-					prepStmt.setInt(1, user.getAccounts().get(i).getAccountId());
-					prepStmt.executeQuery();
-					//After deleting accounts on accounts table, delete them from user_account table
-					deleteQuery = "delete from user_account where id=?";
-					prepStmt = connect.prepareStatement(deleteQuery);
-					prepStmt.setInt(1, user.getAccounts().get(i).getAccountId());
-					prepStmt.executeQuery();
-				}
+					if (balance > 0) {
+						throw new CannotDeleteAccountException("There is money in account. Account cannot be deleted.");
+					} else {
+						String deleteQuery = "delete from accounts where id=?";
+						prepStmt = connect.prepareStatement(deleteQuery);
+						prepStmt.setInt(1, user.getAccounts().get(i).getAccountId());
+						prepStmt.executeUpdate();
+					}
 				}
 			} 
+			//After deleting accounts on accounts table, delete them from user_account table
+			String deleteQuery = "delete from user_account where username=?";
+			prepStmt = connect.prepareStatement(deleteQuery);
+			prepStmt.setString(1, user.getUsername());
+			prepStmt.executeUpdate();
 		}
 		String deleteQuery = "delete from users where username=?";
 		prepStmt = connect.prepareStatement(deleteQuery);
 		prepStmt.setString(1, user.getUsername());
-		prepStmt.executeQuery();
+		prepStmt.executeUpdate();
+		Logging.LogIt("info", user.getType()+", username = "+user.getUsername()+", profile has been deleted");
+		System.out.println(" ");
 	}
 }

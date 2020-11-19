@@ -1,7 +1,6 @@
 package com.revature.bank.bean;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 import com.revature.bank.util.Verify;
 
@@ -9,8 +8,7 @@ public class Transaction {
 	private int accountId;
 	private String username;
 	private double amount;
-	private Date date;
-	private Time time;
+	private Timestamp date;
 	
 	public Transaction() {
 	
@@ -21,13 +19,12 @@ public class Transaction {
 		this.username = username;
 		this.amount = amount;
 	}
-	public Transaction(int accountId, String username, double amount, Date date, Time time) {
+	public Transaction(int accountId, String username, double amount, Timestamp date) {
 	
 		this.accountId = accountId;
 		this.username = username;
 		this.amount = amount;
 		this.date = date;
-		this.time = time;
 	}
 	public int getAccountId() {
 		return accountId;
@@ -38,7 +35,7 @@ public class Transaction {
 	public String getUsername() {
 		return username;
 	}
-	public void setUserUsername(String Username) {
+	public void setUserUsername(String username) {
 		this.username = username;
 	}
 	public double getAmount() {
@@ -47,21 +44,15 @@ public class Transaction {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
-	}
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
 	}
 	@Override
 	public String toString() {
-		return "Transaction [Made on "+date+" at "+time+" by user ID = "+username+" in account "+Verify.findAccount(String.valueOf(accountId))+" in the amount of $"+amount+"]";
+		return "Transaction [Made on "+date+" by user ID = "+username+" in account "+Verify.findAccount(String.valueOf(accountId))+" in the amount of $"+amount+"]";
 	}
 	
 	

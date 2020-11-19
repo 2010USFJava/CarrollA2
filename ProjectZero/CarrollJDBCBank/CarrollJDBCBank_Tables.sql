@@ -24,6 +24,11 @@ account_type varchar(8) not null,
 balance numeric
 );
 
+--create view to pull account objects by username
+create view user_accounts as
+select * from user_account right join accounts 
+on user_account.account_id=accounts.id;
+
 --table linking users to accounts
 create table user_account (
 username varchar(18) not null,
@@ -36,8 +41,7 @@ id serial not null,
 account_id integer not null,
 username varchar(18) not null,
 amount numeric,
-date_made date,
-time_made time
+date_made timestamp
 );
 
 --Adding primary keys
@@ -54,6 +58,16 @@ alter table transaction_history add constraint transaction_history_fkv2 foreign 
 
 --ID generator for account table
 create sequence Acc_seq;
+
+--function to return total of users in database
+create or replace function total_users() returns integer as $$
+declare total integer;
+begin
+	select count("id") into total from "users";
+	return total;
+end;
+$$ language plpgsql;
+select total_users();
 
 --function to return account id after insertion
 create or replace function get_id(a text, b numeric) returns integer as $$
