@@ -23,8 +23,16 @@ public class Driver {
 		Student stu = new Student(0,"bob","greg", new ArrayList<Teacher>());
 		StudentDao sdao= new StudentDaoImpl();
 		sdao.insert(stu);
+		
+		Teacher teach2 = new Teacher(0, "sam", "jones", new ArrayList<Student>());
+		s.save(teach2);
+		
+		stu.getTeachers().add(teach);
+		stu.getTeachers().add(teach2);
+		
 		tx = s.beginTransaction();
 		tx.commit();
+		
 	
 		
 		
